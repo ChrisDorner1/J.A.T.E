@@ -13,7 +13,7 @@ const loadSpinner = () => {
   <div class="loading-container">
   <div class="loading-spinner" />
   </div>
-  `;
+  `
   main.appendChild(spinner);
 };
 

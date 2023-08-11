@@ -22,24 +22,36 @@ module.exports = () => {
         template: './index.html',
         title: 'J.A.T.E',
       }),
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        chunks: ['install'],
+        filename: 'install.html'
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'service-worker.js'
+      }),
       new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
         name: "J.A.T.E",
         short_name: "J.A.T.E",
         description: "A PWA text editor",
         background_color: "#000000",
+        start_url: "/",
+        publicPath: "/",
         crossorigin: "use-credentials",
         icons: [
           {
             src: path.resolve('./src/images/logo.png'),
-            sizes: [96, 128, 192, 256, 384, 512]
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
           }
         ]
       }),
 
-      new InjectManifest({
-        swSrc: './src-sw.js',
-        swDest: 'service-worker.js'
-      })
+
+
       
     ],
 
