@@ -1,19 +1,29 @@
 const butInstall = document.getElementById('buttonInstall');
 
+let defPrompt 
+
 window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
     butInstall.style.visibility = 'visible'
+    defPrompt = event
 
 });
 
 
 
-    butInstall.addEventListener('click', (event) => {
-        console.log("click")
-    event.prompt()
-    butInstall.setAttribute('disabled', true)
+    butInstall.addEventListener('click', () => {
+        if (defPrompt) {
+            defPrompt.prompt()
+            defPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                        butInstall.setAttribute('disabled', true)
     butInstall.textContent = "Successfully installed"
-    console.error("there was an issue installing", err)
+                } else {
+                    console.log('Why no install me?')
+                }
+            })
+        }
+    console.error("there was an issue installing")
 })
 
 window.addEventListener('appinstalled', (event) => { 
