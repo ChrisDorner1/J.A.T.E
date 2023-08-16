@@ -1,6 +1,7 @@
 const butInstall = document.getElementById("buttonInstall");
 
 let defPrompt;
+// adds functionality to the "install" button.
 
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
